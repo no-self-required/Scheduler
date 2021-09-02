@@ -19,8 +19,8 @@ const appointments = [
         id: 1,
         name: "Sylvia Palmer",
         avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
+      },
+    },
   },
   {
     id: 3,
@@ -31,8 +31,8 @@ const appointments = [
         id: 4,
         name: "Cohana Roy",
         avatar: "https://i.imgur.com/FK8V841.jpg",
-      }
-    }
+      },
+    },
   },
   {
     id: 4,
@@ -43,21 +43,17 @@ const appointments = [
         id: 5,
         name: "Sven Jones",
         avatar: "https://i.imgur.com/twYrpay.jpg",
-      }
-    }
+      },
+    },
   },
   {
-    id: 2,
+    id: 5,
     time: "4pm",
   },
 ];
 
 export default function Application(props) {
-
-
-
   const [day, setDay] = useState("Monday");
-
 
   const days = [
     {
@@ -87,12 +83,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList
-            key={day.id}
-            days={days}
-            day={day}
-            setDay={setDay}
-          />
+          <DayList key={day.id} days={days} day={day} setDay={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -101,7 +92,10 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
+        {appointments.map((appointment) => (
+          <Appointment key={appointment.id} {...appointment} />
+        ))}
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
