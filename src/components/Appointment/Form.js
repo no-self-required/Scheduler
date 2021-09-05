@@ -3,6 +3,7 @@ import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
 export default function Form(props) {
+  console.log("FORM PROPS.INTERVIEWERS: ====", props.interviewers)
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
@@ -15,7 +16,7 @@ export default function Form(props) {
     reset();
     props.onCancel();
   };
-
+  //LINE 47: props.onSave is not a function
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -34,7 +35,7 @@ export default function Form(props) {
         </form>
         <InterviewerList
           interviewers={props.interviewers}
-          value={interviewer}
+          interviewer={interviewer}
           onChange={setInterviewer}
         />
       </section>

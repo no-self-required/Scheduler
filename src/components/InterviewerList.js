@@ -3,17 +3,19 @@ import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
 
 export default function InterviewerList(props) {
-  const {interviewers, interviewer, setInterviewer} = props
-
-  const parsedInterviewers = interviewers.map((inter) => (
-    <InterviewerListItem
-      key={inter.id}
-      name={inter.name}
-      avatar={inter.avatar}
-      selected={inter.id === interviewer}
-      setInterviewer={event => props.onChange(interviewer.id)}
-    />
-  ));
+  console.log("INTERVIEW LIST PROPS: ", props.interviewers)
+  //LINE 15: props.setInterviewer is not a function
+  const parsedInterviewers = props.interviewers.map((inter) => {
+    return (
+      <InterviewerListItem
+        key={inter.id}
+        name={inter.name}
+        avatar={inter.avatar}
+        selected={inter.id === props.interviewer}
+        setInterviewer={(event) => props.setInterviewer(inter.id)}
+      />
+    );
+  });
 
   return (
     <section className="interviewers">

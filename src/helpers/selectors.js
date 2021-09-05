@@ -20,3 +20,20 @@ export function getInterview(state, interview) {
     interviewer: state.interviewers[interview.interviewer],
   };
 }
+//HERE STUCK
+//run api and app
+//run test
+export function getInterviewersForDay(state, day) {
+  const output = [];
+  const days = [...state.days]
+  const interviewers = {...state.interviewers};
+  const currentDay = days.filter((x) => x.name === day);
+  let currentInterviewers;
+  if (currentDay[0]) {
+    currentInterviewers = currentDay[0].interviewers
+  }
+  if (currentInterviewers) {
+    currentInterviewers.map((i => output.push(interviewers[i])));
+  }
+  return output
+};
