@@ -3,7 +3,7 @@ import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
 export default function Form(props) {
-  console.log("FORM PROPS.INTERVIEWERS: ====", props.interviewers)
+  console.log("FORM PROPS.INTERVIEWERS: ====", props.interviewers);
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
@@ -16,6 +16,7 @@ export default function Form(props) {
     reset();
     props.onCancel();
   };
+
   //LINE 47: props.onSave is not a function
   return (
     <main className="appointment__card appointment__card--create">
@@ -27,7 +28,7 @@ export default function Form(props) {
             name="name"
             type="text"
             placeholder="Enter Student Name"
-            onChange={event => setName(event.target.value)}
+            onChange={(event) => setName(event.target.value)}
             /*
           This must be a controlled component
         */
