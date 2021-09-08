@@ -3,9 +3,9 @@ import Button from "components/Button";
 import InterviewerList from "components/InterviewerList";
 
 export default function Form(props) {
-  console.log("FORM PROPS.INTERVIEWERS: ====", props.interviewers);
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [error, setError] = useState("");
 
   const reset = function () {
     setName("");
@@ -17,6 +17,15 @@ export default function Form(props) {
     props.onCancel();
   };
 
+  function validate() {
+    if (name === "") {
+      setError("Student name cannot be blank");
+      return;
+    }
+  
+    props.onSave(name, interviewer);
+  }
+  
   //LINE 47: props.onSave is not a function
   return (
     <main className="appointment__card appointment__card--create">
@@ -29,11 +38,13 @@ export default function Form(props) {
             type="text"
             placeholder="Enter Student Name"
             onChange={(event) => setName(event.target.value)}
+            data-testid="student-name-input"
             /*
           This must be a controlled component
         */
           />
         </form>
+        <section className="appointment__validation">{error}</section>
         <InterviewerList
           interviewers={props.interviewers}
           interviewer={interviewer}
@@ -45,7 +56,7 @@ export default function Form(props) {
           <Button danger onClick={cancel}>
             Cancel
           </Button>
-          <Button confirm onClick={() => props.onSave(name, interviewer)}>
+          <Button confirm onClick={validate}>
             Save
           </Button>
         </section>
