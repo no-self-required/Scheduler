@@ -36,12 +36,16 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    setState({
-      ...state,
-      appointments,
-    });
+
     return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
-      return res;
+      setState((prev) => {
+        const days = updateSpots(appointments, prev);
+        return {
+          ...prev,
+          appointments,
+          days,
+        };
+      });
     });
   }
 
@@ -54,14 +58,49 @@ export function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    setState({
-      ...state,
-      appointments,
-    });
+
     return axios.delete(`/api/appointments/${id}`).then((res) => {
-      console.log("delete response....", res);
-      return res;
+      setState((prev) => {
+        const days = updateSpots(appointments, prev);
+        return {
+          ...prev,
+          appointments,
+          days,
+        };
+      });
     });
+  }
+
+  //1. Update spots when we book or cancel an interview
+  //  - Values of spots is stored in: day object
+  //  - Calculate number of spots depending on how many null interview slots.
+
+  //2. Update state with new number of spots when the update is confirmed on the server side
+  //3. Step 2. Should be done in the bookInterview and cancelInterview functions and applied in the .then part of the AJAX request
+
+  function updateSpots(appointments, state) {
+    //unpack days array
+    let days = [...state.days];
+
+    //Loop through every day object
+    for (const day of days) {
+      //set spots counter
+      let spots = 0;
+      //set a variable to all ids inside appointments array
+      const appIDs = day.appointments;
+
+      //Loop through all ids of appointments array
+      for (const id of appIDs) {
+        //if interview key of appointments[id] is null, add 1 to spots.
+        if (appointments[id].interview === null) {
+          spots++;
+        }
+      }
+      //update spots value in days object for each day
+      days[day.id - 1].spots = spots;
+    }
+
+    return days;
   }
 
   return {
