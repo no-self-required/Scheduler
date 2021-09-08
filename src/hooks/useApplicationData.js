@@ -82,16 +82,12 @@ export function useApplicationData() {
     //unpack days array
     let days = [...state.days];
 
-    //Loop through every day object
+    //Loop through every day object and initialize spots to 0
     for (const day of days) {
-      //set spots counter
       let spots = 0;
-      //set a variable to all ids inside appointments array
-      const appIDs = day.appointments;
 
-      //Loop through all ids of appointments array
-      for (const id of appIDs) {
-        //if interview key of appointments[id] is null, add 1 to spots.
+      //Loop through all ids of appointments array; if interview key of appointments[id] is null, add 1 to spots.
+      for (const id of day.appointments) {
         if (appointments[id].interview === null) {
           spots++;
         }
