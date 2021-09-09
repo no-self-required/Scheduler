@@ -22,15 +22,15 @@ export function getInterview(state, interview) {
 
 export function getInterviewersForDay(state, day) {
   const output = [];
-  const days = [...state.days]
-  const interviewers = {...state.interviewers};
+  const days = [...state.days];
+  const interviewers = { ...state.interviewers };
   const currentDay = days.filter((x) => x.name === day);
   let currentInterviewers;
   if (currentDay[0]) {
-    currentInterviewers = currentDay[0].interviewers
+    currentInterviewers = currentDay[0].interviewers;
   }
   if (currentInterviewers) {
-    currentInterviewers.map((i => output.push(interviewers[i])));
+    currentInterviewers.map((i) => output.push(interviewers[i]));
   }
-  return output
-};
+  return output;
+}
