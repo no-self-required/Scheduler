@@ -71,15 +71,8 @@ export function useApplicationData() {
     });
   }
 
-  //1. Update spots when we book or cancel an interview
-  //  - Values of spots is stored in: day object
-  //  - Calculate number of spots depending on how many null interview slots.
-
-  //2. Update state with new number of spots when the update is confirmed on the server side
-  //3. Step 2. Should be done in the bookInterview and cancelInterview functions and applied in the .then part of the AJAX request
-
   function updateSpots(appointments, state) {
-    //unpack days array
+    //Create a days array copy
     let days = [...state.days];
 
     //Loop through every day object and initialize spots to 0
