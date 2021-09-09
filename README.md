@@ -23,6 +23,11 @@ npm run storybook
 ```
 
 ## Screenshots
+!["Booking an interview"](https://raw.githubusercontent.com/no-self-required/Scheduler/master/docs/book.png)
+
+!["Confirmed interview"](https://raw.githubusercontent.com/no-self-required/Scheduler/master/docs/confirmed.png)
+
+!["Canceling an interview"](https://raw.githubusercontent.com/no-self-required/Scheduler/master/docs/cancel.png)
 
 ## Dependencies
 - axios

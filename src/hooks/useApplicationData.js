@@ -71,7 +71,7 @@ export function useApplicationData() {
   }
 
   function updateSpots(appointments, state) {
-    //Create a days array copy
+    //Copy days array
     let days = [...state.days];
 
     //Loop through every day object and initialize spots to 0
